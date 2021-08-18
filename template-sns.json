@@ -4,7 +4,7 @@
 	"Parameters": {
 		"SnsTopicName" : {
 			"Type" : "String",
-			"Default" : "MySNSTopic",
+			"Default" : "MySNSTopic-CFT",
 			"Description" : "Type Acual name of SNS Topic here.."
 		}
 	},
