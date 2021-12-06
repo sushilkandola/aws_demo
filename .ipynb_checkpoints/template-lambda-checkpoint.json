@@ -1,0 +1,47 @@
+{
+	"AWSTemplateFormatVersion" : "2010-09-09",
+	"Description" : "Creates Lambda Function",
+	"Parameters": {
+		"LambdaFunctionName" : {
+			"Type" : "String",
+			"Default" : "MyLambdaFunction",
+			"Description" : "Type Acual name of lambda function here.."
+		},
+		"LambdaExecutionRoleArn" : {
+			"Type" : "String",
+			"Default" : "arn:aws:iam::364124278737:role/FastUpLambdaServiceRole",
+			"Description" : "ARN of the Role, haoving Lambda Execution Access"
+		}
+	},
+	"Resources" : {
+		"myLambdaResource" : {
+			"Type" : "AWS::Lambda::Function",
+			"Properties" :{
+				"FunctionName" : { "Ref" : "LambdaFunctionName" },
+				"Code" : {
+					"S3Bucket" : "bucket_name",
+					"S3Key" : "FastUp-AccessCodeCommit-UpdateRDS-df7e2b4d-b236-4681-9743-84aa1722ae51.zip"
+				},
+				"Runtime" : "python3.6",
+				"Role" : { "Ref" : "LambdaExecutionRoleArn" },
+				"Timeout" : 300,
+				"Handler" : "lambda_function.lambda_handler"
+			}
+		}
+	},
+	"Outputs" : {
+		"CFTOutput" : {
+			"Description" : "Output of the CFT Teamplate is displayed Here",
+			"Export" : {
+				"Name" : "Lambda ARN"
+			},
+			"Value" : {
+				"Fn::GetAtt": [
+					"myLambdaResource",
+					"Arn"
+				]
+
+			}
+		} 
+	}
+}
